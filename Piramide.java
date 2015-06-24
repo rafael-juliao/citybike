@@ -7,7 +7,7 @@ public class Piramide extends GameObject {
 	private static final int SIZE = 10;
 	
 	@Override
-	public void create() {
+	public void draw(GL2 gl) {
 
 		gl.glBegin(GL2.GL_QUADS);
 		vertA();

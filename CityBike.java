@@ -6,6 +6,7 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.Timer;
 
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
@@ -79,6 +80,8 @@ public class CityBike implements GLEventListener {
 	private Player player;
 	private Road road;
 	
+	Timer timerAddCar;
+	
 
 	public void start(GLCapabilities capabilities){
 		player = new Player();
@@ -132,6 +135,8 @@ public class CityBike implements GLEventListener {
         //setCamera(gl, glu, 100);
     }
     
+    
+    //MOST IMPORTANT M
     public void display(GLAutoDrawable drawable) {
         gl = drawable.getGL().getGL2();
         

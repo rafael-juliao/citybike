@@ -7,11 +7,12 @@ public class Player extends GameObject{
 	private static final int SIZE_X = 5, SIZE_Y = 30, SIZE_Z = 10;
 	private static final int SPEED = 5;
 	
-	private static final float COLOR_RED = 0.0f, COLOR_GREEN = 1.0f, COLOR_BLUE = 1.0f;
+	private static final float COLOR_RED = 0.5f, COLOR_GREEN = 0.0f, COLOR_BLUE = 0.0f;
 
 	
 	@Override
-	public void create() {
+	public void draw(GL2 gl) {
+		this.gl = gl;
 		colorize();
 		
 		gl.glBegin(GL2.GL_QUADS); 

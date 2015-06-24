@@ -5,7 +5,8 @@ import com.jogamp.opengl.GL2;
 public class Cube extends GameObject{
 
 	@Override
-	public void create() {
+	public void draw(GL2 gl) {
+		this.gl = gl;
 		gl.glBegin(GL2.GL_QUADS);                // Begin drawing the color cube with 6 quads
 	      // Top face (y = 1.0f)
 	      // Define vertices in counter-clockwise (CCW) order with normal pointing out

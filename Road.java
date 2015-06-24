@@ -1,8 +1,12 @@
 package pucrs.cg1.citybike;
 
+import java.util.ArrayList;
+
 import com.jogamp.opengl.GL2;
 
 public class Road extends GameObject{
+	
+	ArrayList<Car> cars;
 	
 	private static final int
 	DISTANCE_SIZE = 50 * 60 * 5,
@@ -16,7 +20,8 @@ public class Road extends GameObject{
 	}
 
 	@Override
-	public void create() {
+	public void draw(GL2 gl) {
+		this.gl = gl;
 		gl.glBegin(GL2.GL_QUADS);
 
 		gl.glColor3f(0.5f, 0.5f, 0.5f);
