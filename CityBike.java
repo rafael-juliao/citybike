@@ -111,7 +111,7 @@ public class CityBike implements GLEventListener {
 		window.setVisible(true);
 		window.requestFocus();
         canvas.requestFocus();
-        TimerActionAddCar(2000);
+        TimerActionAddCar(1500);
 	}
 	
 	public void TimerActionAddCar(int sec) {
@@ -122,7 +122,14 @@ public class CityBike implements GLEventListener {
 	ActionListener actionAddCar = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			Random random = new Random();
-			float x = (float) (random.nextDouble() * 100 - 50);
+			int pos = random.nextInt(3);
+			float x = 0.0f;
+			if(pos == 0) // left
+				x = 90.0f;
+			else if(pos == 1) //center
+				x = -10.0f;
+			else
+				x = -110.0f; //rigth
 			road.cars.add(new Car(x, player.y, player.z + 520));
 		}
 	};
@@ -167,7 +174,6 @@ public class CityBike implements GLEventListener {
 		player.move();
 		player.draw(gl);
         setCamera(gl);
-
     }
 	
 	private void setCamera(GL2 gl) {

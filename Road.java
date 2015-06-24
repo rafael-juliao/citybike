@@ -51,8 +51,10 @@ public class Road extends GameObject{
 		}
 		gl.glEnd(); 
 		
-		for(Car carItem: cars)
+		for(Car carItem: cars) {
 			carItem.draw(gl);
+			carItem.move();
+		}
 		
 	}
 
