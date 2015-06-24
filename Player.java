@@ -4,6 +4,7 @@ import com.jogamp.opengl.GL2;
 
 public class Player extends GameObject{
 	
+	
 	private static final int SIZE_X = 5, SIZE_Y = 30, SIZE_Z = 10;
 	private static final int SPEED = 5;
 	
@@ -163,6 +164,29 @@ public class Player extends GameObject{
 	public void vertH(){
 		gl.glVertex3f( x + SIZE_X, y + SIZE_Y , z + SIZE_Z);		
 	}
+
+
+	
+	@Override
+	public float[][] get2DSquare() {
+		float[][] square = new float[4][2];
+		
+		square[DL][X] = x;
+		square[DL][Z] = z;
+		
+		square[DR][X] = x + SIZE_X;
+		square[DR][Z] = z;
+		
+		square[UL][X] = x;
+		square[UL][Z] = z + SIZE_Z;
+		
+		square[UR][X] = x + SIZE_X;
+		square[UR][Z] = z + SIZE_Z;
+		
+		return square;
+	}
+	
+	
 	
 	
 }

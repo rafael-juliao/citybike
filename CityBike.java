@@ -139,6 +139,7 @@ public class CityBike implements GLEventListener {
     //MOST IMPORTANT M
     public void display(GLAutoDrawable drawable) {
         gl = drawable.getGL().getGL2();
+        setCamera(gl);
         
 		gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT); // Clear color and depth buffers
 		gl.glMatrixMode(GL2.GL_MODELVIEW);     // To operate on model-view matrix
@@ -150,7 +151,6 @@ public class CityBike implements GLEventListener {
 		road.draw(gl);
 		player.move();
 		player.draw(gl);
-        setCamera(gl);
 
     }
 	
@@ -162,6 +162,7 @@ public class CityBike implements GLEventListener {
         // Perspective.
         float widthHeightRatio = (float) canvas.getWidth() / (float) canvas.getHeight();
         glu.gluPerspective(45, widthHeightRatio, 1, 1000);
+        
         glu.gluLookAt(
         		player.x , player.y +35, player.z - 50, 	//WHERE
         		player.x, player.y+35, player.z,	//AT 
