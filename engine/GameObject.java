@@ -1,8 +1,8 @@
-package pucrs.cg1.citybike;
+package pucrs.cg1.citybike.engine;
 
 import com.jogamp.opengl.GL2;
 
-public class GameObject implements ColisionProperty{
+public class GameObject implements ColisionProperty, GameConfiguration{
 	
 	public float x, y, z;	
 	public GL2 gl;

@@ -1,25 +1,14 @@
-package pucrs.cg1.citybike;
+package pucrs.cg1.citybike.objects;
 
-import java.util.ArrayList;
+
+import pucrs.cg1.citybike.engine.GameObject;
 
 import com.jogamp.opengl.GL2;
 
 public class Road extends GameObject{
-	
-	public ArrayList<Car> cars;
-	ArrayList<Role> roles;
-	
-	
-	private static final int
-	DISTANCE_SIZE = 50 * 60 * 5,
-	WIDTH_SIZE = 300,
-	WIDTH_ROAD_DETAIL = 10,
-	TOTAL_DETAILS = 50,
-	DETAIL_SIZE = 50;
-
+		
 	public Road(){
 		y-=5;
-		cars = new ArrayList<Car>();
 	}
 
 	@Override
@@ -48,11 +37,7 @@ public class Road extends GameObject{
 			gl.glVertex3f(50+ x + (WIDTH_ROAD_DETAIL/2), y , i * DETAIL_SIZE + DETAIL_SIZE);
 			
 		}
-		gl.glEnd(); 
-		
-		for(Car carItem: cars)
-			carItem.draw(gl);
-		
+		gl.glEnd(); 		
 	}
 
 

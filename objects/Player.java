@@ -1,16 +1,14 @@
-package pucrs.cg1.citybike;
+package pucrs.cg1.citybike.objects;
+
+import pucrs.cg1.citybike.engine.GameObject;
 
 import com.jogamp.opengl.GL2;
 
 public class Player extends GameObject{
 	
 	
-	private static final int SIZE_X = 5, SIZE_Y = 30, SIZE_Z = 10;
-	private static final int SPEED = 5;
-	
-	private static final float COLOR_RED = 0.5f, COLOR_GREEN = 0.0f, COLOR_BLUE = 0.0f;
-
-	
+	private int speed = 0;
+		
 	@Override
 	public void draw(GL2 gl) {
 		this.gl = gl;
@@ -112,7 +110,7 @@ public class Player extends GameObject{
 	}
 	
 	public void move(){
-		z += SPEED;
+		z += speed;
 	}
 
 	public void moveLeft(){
@@ -122,7 +120,16 @@ public class Player extends GameObject{
 	public void moveRight(){
 		x -= 3;
 	}
+	
+	public void speedUp(){
+		if( speed != MOTO_MAX_SPEED)
+		speed+= 1;
+	}
 
+	public void speedDown(){
+		if( speed != 0)
+		speed-= 1;
+	}
 	/**
 	 * Eight Vertices
 	 * 	G   H
@@ -136,33 +143,33 @@ public class Player extends GameObject{
 	}
 	
 	public void vertB(){
-		gl.glVertex3f( x + SIZE_X , y, z);
+		gl.glVertex3f( x + MOTO_SIZE_X , y, z);
 		
 	}
 	
 	public void vertC(){
-		gl.glVertex3f( x , y, z + SIZE_Z);
+		gl.glVertex3f( x , y, z + MOTO_SIZE_Z);
 	}
 	
 	public void vertD(){
-		gl.glVertex3f( x + SIZE_X, y, z + SIZE_Z);		
+		gl.glVertex3f( x + MOTO_SIZE_X, y, z + MOTO_SIZE_Z);		
 	}
 	
 	public void vertE(){
-		gl.glVertex3f( x , y + SIZE_Y , z);
+		gl.glVertex3f( x , y + MOTO_SIZE_Y , z);
 	}
 	
 	public void vertF(){
-		gl.glVertex3f( x + SIZE_X , y + SIZE_Y, z);
+		gl.glVertex3f( x + MOTO_SIZE_X , y + MOTO_SIZE_Y, z);
 		
 	}
 	
 	public void vertG(){
-		gl.glVertex3f( x , y + SIZE_Y, z + SIZE_Z);
+		gl.glVertex3f( x , y + MOTO_SIZE_Y, z + MOTO_SIZE_Z);
 	}
 	
 	public void vertH(){
-		gl.glVertex3f( x + SIZE_X, y + SIZE_Y , z + SIZE_Z);		
+		gl.glVertex3f( x + MOTO_SIZE_X, y + MOTO_SIZE_Y , z + MOTO_SIZE_Z);		
 	}
 
 
@@ -174,14 +181,14 @@ public class Player extends GameObject{
 		square[DL][X] = x;
 		square[DL][Z] = z;
 		
-		square[DR][X] = x + SIZE_X;
+		square[DR][X] = x + MOTO_SIZE_X;
 		square[DR][Z] = z;
 		
 		square[UL][X] = x;
-		square[UL][Z] = z + SIZE_Z;
+		square[UL][Z] = z + MOTO_SIZE_Z;
 		
-		square[UR][X] = x + SIZE_X;
-		square[UR][Z] = z + SIZE_Z;
+		square[UR][X] = x + MOTO_SIZE_X;
+		square[UR][Z] = z + MOTO_SIZE_Z;
 		
 		return square;
 	}

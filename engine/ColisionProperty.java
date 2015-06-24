@@ -1,4 +1,4 @@
-package pucrs.cg1.citybike;
+package pucrs.cg1.citybike.engine;
 
 public interface ColisionProperty {
 	public static final int DL = 0;
