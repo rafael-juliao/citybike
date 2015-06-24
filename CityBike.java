@@ -159,11 +159,11 @@ public class CityBike implements GLEventListener {
         
 		gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT); // Clear color and depth buffers
 		gl.glMatrixMode(GL2.GL_MODELVIEW);     // To operate on model-view matrix
-		  
-		for( GameObject gameObject : gameObjects){
-			gameObject.draw(gl);
-		}
 		
+		for( Car car: road.cars ){
+			if( ColisionDetector.isColiding(player, car))
+				System.exit(0);
+		}
 		road.draw(gl);
 		player.move();
 		player.draw(gl);

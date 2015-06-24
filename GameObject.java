@@ -4,9 +4,8 @@ import com.jogamp.opengl.GL2;
 
 public class GameObject implements ColisionProperty{
 	
-	float x, y, z;
-	
-	GL2 gl;
+	public float x, y, z;	
+	public GL2 gl;
 			
 	public void draw(GL2 gl) {
 		this.gl = gl;
@@ -14,9 +13,6 @@ public class GameObject implements ColisionProperty{
 
 	@Override
 	public float[][] get2DSquare() {
-
-		
-		
 		return null;
 	}
 }

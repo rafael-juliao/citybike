@@ -1,5 +1,6 @@
 package pucrs.cg1.citybike;
 
+
 public class ColisionDetector {
 	
 	public static final int DL = 0;
@@ -11,6 +12,8 @@ public class ColisionDetector {
 	public static final int Z = 1;
 	
 	
+	
+
 	/**
 	 * Check if game object is coliding with a rectangle
 	 * */

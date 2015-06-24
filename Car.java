@@ -91,4 +91,23 @@ public class Car extends GameObject {
 		gl.glVertex3f( x + SIZE_X, y + SIZE_Y , z + SIZE_Z);		
 	}
 	
+	@Override
+	public float[][] get2DSquare() {
+		float[][] square = new float[4][2];
+		
+		square[DL][X] = x;
+		square[DL][Z] = z;
+		
+		square[DR][X] = x + SIZE_X;
+		square[DR][Z] = z;
+		
+		square[UL][X] = x;
+		square[UL][Z] = z + SIZE_Z;
+		
+		square[UR][X] = x + SIZE_X;
+		square[UR][Z] = z + SIZE_Z;
+		
+		return square;
+	}
+	
 }

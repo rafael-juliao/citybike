@@ -6,7 +6,7 @@ import com.jogamp.opengl.GL2;
 
 public class Road extends GameObject{
 	
-	ArrayList<Car> cars;
+	public ArrayList<Car> cars;
 	ArrayList<Role> roles;
 	
 	
