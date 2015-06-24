@@ -22,9 +22,6 @@ public class ColisionDetector {
 	public static boolean isColiding(GameObject a, GameObject b){		
 		
 		//Role Threating
-		if( b instanceof Role){
-			return isColidingRole( a, (Role) b);
-		}
 		float[][] retA = a.get2DSquare();
 		float[][] retB = b.get2DSquare();
 		
@@ -37,14 +34,6 @@ public class ColisionDetector {
 		}
 		
 		return false;	
-	}
-
-	/**
-	 * Check if game object is coliding with a role
-	 * */
-	private static boolean isColidingRole(GameObject a, Role b) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	private static boolean isInside(float[] point, float[][] square) {

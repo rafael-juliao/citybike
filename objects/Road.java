@@ -18,13 +18,13 @@ public class Road extends GameObject{
 
 		gl.glColor3f(0.5f, 0.5f, 0.5f);
 		
-		gl.glVertex3f( x - (WIDTH_SIZE/2), y , z + DISTANCE_SIZE);
-		gl.glVertex3f( x - (WIDTH_SIZE/2), y , z);
-		gl.glVertex3f( x + (WIDTH_SIZE/2), y , z);
-		gl.glVertex3f( x + (WIDTH_SIZE/2), y , z + DISTANCE_SIZE);
+		gl.glVertex3f( x - (ROAD_WIDTH_SIZE/2), y , z + ROAD_SIZE);
+		gl.glVertex3f( x - (ROAD_WIDTH_SIZE/2), y , z);
+		gl.glVertex3f( x + (ROAD_WIDTH_SIZE/2), y , z);
+		gl.glVertex3f( x + (ROAD_WIDTH_SIZE/2), y , z + ROAD_SIZE);
 
 		gl.glColor3f(1f, 1f, 1f);
-		for( int i = 0; i < DISTANCE_SIZE / DETAIL_SIZE; i+=2){			
+		for( int i = 0; i < ROAD_SIZE / DETAIL_SIZE; i+=2){			
 			
 			gl.glVertex3f(-50+ x - (WIDTH_ROAD_DETAIL/2), y , i * DETAIL_SIZE + DETAIL_SIZE);
 			gl.glVertex3f(-50+ x - (WIDTH_ROAD_DETAIL/2), y , i * DETAIL_SIZE );

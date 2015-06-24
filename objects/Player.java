@@ -1,5 +1,7 @@
 package pucrs.cg1.citybike.objects;
 
+import java.util.Random;
+
 import pucrs.cg1.citybike.engine.GameObject;
 
 import com.jogamp.opengl.GL2;
@@ -107,6 +109,12 @@ public class Player extends GameObject{
 
 	public void colorize(){
 		gl.glColor3f(COLOR_RED, COLOR_GREEN, COLOR_BLUE);     // Green
+	}
+	
+	
+	public void tilt(float base){
+		Random random = new Random();
+		x+= ((-5) + random.nextInt(10)) * base;
 	}
 	
 	public void move(){

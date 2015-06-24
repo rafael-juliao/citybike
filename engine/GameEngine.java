@@ -23,7 +23,7 @@ import com.jogamp.opengl.util.FPSAnimator;
 public class GameEngine implements GLEventListener, GameConfiguration{
 
 	public interface OnUpdateCallback{
-		void onUpdate(GL2 gl);
+		void onUpdate(GL2 gl, GLU glu);
 	}
 	
     public interface CameraCallback{
@@ -49,7 +49,7 @@ public class GameEngine implements GLEventListener, GameConfiguration{
 	private CameraCallback cameraCallback;
 	private KeyListener gameControl;
 	
-    private GLU glu;
+    public static GLU glu;
 	private GLCanvas canvas;	
 
 	
@@ -107,6 +107,17 @@ public class GameEngine implements GLEventListener, GameConfiguration{
         //setCamera(gl, glu, 100);
     }
     
+    public void stop(){
+    	if( fpsAnimator.isStarted() )
+    		fpsAnimator.stop();
+    }
+    
+    public void restart(){
+    	if( !fpsAnimator.isStarted() )
+    		fpsAnimator.start();
+    }
+    
+    
     //MOST IMPORTANT M
     public void display(GLAutoDrawable drawable) {
     	GL2 gl = drawable.getGL().getGL2();
@@ -126,7 +137,7 @@ public class GameEngine implements GLEventListener, GameConfiguration{
         gl.glMatrixMode(GL2.GL_MODELVIEW);
         gl.glLoadIdentity();
         
-    	onUpdateCallback.onUpdate(gl);
+    	onUpdateCallback.onUpdate(gl, glu);
     	
 
     }

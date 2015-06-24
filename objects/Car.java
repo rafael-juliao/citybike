@@ -86,6 +86,53 @@ public class Car extends GameObject {
 			vertF();
 			
 		gl.glEnd();  // End of drawing color-cube
+	
+		gl.glBegin(GL2.GL_LINES);
+		gl.glColor3f(0f, 0f, 0f);
+		gl.glLineWidth(5f);
+		
+		//First Square
+		vertA();
+		vertB();
+		
+		vertB();
+		vertF();
+
+		vertF();
+		vertE();
+		
+
+		vertE();
+		vertA();
+		
+		
+		//Ligations
+		vertA();
+		vertC();
+
+		vertB();
+		vertD();
+		
+		vertE();
+		vertG();		
+
+		vertF();
+		vertH();
+		
+		//Second Square
+		vertC();
+		vertD();
+
+		vertD();
+		vertH();
+
+		vertH();
+		vertG();
+
+		vertG();
+		vertC();	
+		
+		gl.glEnd();  
 	}
 	
 	public void vertA(){

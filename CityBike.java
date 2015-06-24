@@ -104,16 +104,14 @@ public class CityBike implements GameConfiguration {
 	OnUpdateCallback updateCallback = new OnUpdateCallback() {
 		
 		@Override
-		public void onUpdate(GL2 gl) {
+		public void onUpdate(GL2 gl, GLU glu) {
 			synchronized (carsLock) {
-				if( player.z > DISTANCE_SIZE)
-					playerWin();
+				
+				road.draw(gl);
+				player.move();
+				player.draw(gl);
+				
 				for( Car car: cars ){
-					if( ColisionDetector.isColiding(player, car)){
-						playerLose();
-						return;
-					}
-					
 					for( Car car_aux: cars ){
 						if( !car_aux.equals(car) && ColisionDetector.isColiding(car, car_aux)){
 							//Se os carros baterem o de traz freia
@@ -126,54 +124,63 @@ public class CityBike implements GameConfiguration {
 					}
 					car.move();
 					car.draw(gl);
+					
+					if( ColisionDetector.isColiding(player, car)){
+						playerLose();
+						return;
+					}
 				}
+				
 				
 				for( Role role: roles ){
 					if( ColisionDetector.isColiding(player, role)){
-						playerLose();
+						player.tilt(role.radius);
 					}
-					role.draw(gl);
+					role.draw2D(gl, glu);
 				}
-				road.draw(gl);
-				player.move();
-				player.draw(gl);
+				
+				if( player.z > ROAD_SIZE)
+					playerWin();
+				
+				if( player.x > -MOTO_SIZE_X + ROAD_WIDTH_SIZE/2 || player.x < (-ROAD_WIDTH_SIZE)/2){
+					playerLose();
+				}
+
 			}			
 			
 		}
 
 		private void playerLose() {
+			engine.stop();
 			renderer = new TextRenderer(
-					new Font("SansSerif", Font.BOLD, 45));
+					new Font("SansSerif", Font.BOLD, 60));
 			renderer.beginRendering(850, 850);
 			renderer.setColor(1.0f, 0.0f, 0.0f, 0.8f);
-			renderer.draw("Game Over!", 320, 425);
+			renderer.draw("Game Over!", 280, 700);
 			renderer.endRendering();
-			player.setSpeed(0);
-			cars.clear();
-			restartGame();
+		
 		}
 
 		private void playerWin() {
+			engine.stop();
 			renderer = new TextRenderer(
-					new Font("SansSerif", Font.BOLD, 45));
+					new Font("SansSerif", Font.BOLD, 60));
 			renderer.beginRendering(850, 850);
 			renderer.setColor(0.0f, 1.0f, 0.0f, 0.8f);
-			renderer.draw("You Win!", 320, 425);
+			renderer.draw("You Win!", 280, 700);
 			renderer.endRendering();
-			player.setSpeed(0);
-			cars.clear();
 		}
-
-		private void restartGame() {
-			synchronized (carsLock) {
-				cars.clear();
-				player = new Player();
-			}
-		}
-		
 		
 	};
 	
+
+	private void restartGame() {
+		synchronized (carsLock) {
+			cars.clear();
+			player = new Player();
+			engine.restart();
+		}
+	}
 	
 	//Camera Callback
 	CameraCallback cameraCallback = new CameraCallback() {		
@@ -218,6 +225,9 @@ public class CityBike implements GameConfiguration {
 					player.speedDown();
 					break;
 					
+				case SPACE:
+					restartGame();
+					break;
 				case PRINT_LOG:
 					
 					break;

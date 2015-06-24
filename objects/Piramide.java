@@ -6,11 +6,13 @@ import com.jogamp.opengl.GL2;
 
 public class Piramide extends GameObject {
 
-	private static final int SIZE = 10;
+	public int size = 10;
 	
 	@Override
 	public void draw(GL2 gl) {
 
+		gl.glColor3f(0.5f, 0.5f, 0f);
+		
 		gl.glBegin(GL2.GL_QUADS);
 		vertA();
 		vertB();
@@ -34,6 +36,35 @@ public class Piramide extends GameObject {
 		vertD();
 		vertE();
 		
+
+		gl.glColor3f(0f, 0f, 0f);
+		gl.glBegin(GL2.GL_LINES);
+		gl.glLineWidth(5f);
+		vertA();
+		vertB();
+		
+		vertB();
+		vertC();
+		
+		vertC();		
+		vertD();
+		
+		vertD();
+		vertA();
+		
+		vertA();
+		vertE();
+		
+		vertB();
+		vertE();
+		
+		vertC();
+		vertE();
+		
+		vertD();
+		vertE();
+		
+		
 		gl.glEnd();   // Done drawing the pyramid
 		
 	}
@@ -44,21 +75,21 @@ public class Piramide extends GameObject {
 		gl.glVertex3f( x , y, z);		
 	}
 	void vertB(){
-		gl.glVertex3f( x + SIZE, y, z);		
+		gl.glVertex3f( x + size, y, z);		
 		
 	}
 	void vertC(){
-		gl.glVertex3f( x + SIZE, y, z + SIZE);		
+		gl.glVertex3f( x + size, y, z + size);		
 		
 	}
 	void vertD(){
-		gl.glVertex3f( x, y, z + SIZE);				
+		gl.glVertex3f( x, y, z + size);				
 	}
 	
 	//TOPO
 	void vertE(){
 
-		gl.glVertex3f( x+ (SIZE/2), y + SIZE, z + (SIZE/2));			
+		gl.glVertex3f( x+ (size/2), y + (2*size), z + (size/2));			
 	}
 	
 
