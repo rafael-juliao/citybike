@@ -1,9 +1,12 @@
 package pucrs.cg1.citybike;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.Timer;
@@ -108,8 +111,21 @@ public class CityBike implements GLEventListener {
 		window.setVisible(true);
 		window.requestFocus();
         canvas.requestFocus();
-		
+        TimerActionAddCar(2000);
 	}
+	
+	public void TimerActionAddCar(int sec) {
+		timerAddCar = new Timer(sec, actionAddCar);
+		timerAddCar.start();
+	}
+	
+	ActionListener actionAddCar = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			Random random = new Random();
+			float x = (float) (random.nextDouble() * 100 - 50);
+			road.cars.add(new Car(x, player.y, player.z + 520));
+		}
+	};
 		
 	
 	//Game Lifecycle Methos
