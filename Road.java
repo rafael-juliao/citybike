@@ -19,6 +19,7 @@ public class Road extends GameObject{
 
 	public Road(){
 		y-=5;
+		cars = new ArrayList<Car>();
 	}
 
 	@Override
@@ -48,7 +49,9 @@ public class Road extends GameObject{
 			
 		}
 		gl.glEnd(); 
-
+		
+		for(Car carItem: cars)
+			carItem.draw(gl);
 		
 	}
 
