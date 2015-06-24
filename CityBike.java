@@ -1,6 +1,7 @@
 package pucrs.cg1.citybike;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -22,6 +23,7 @@ import pucrs.cg1.citybike.objects.Role;
 
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.glu.GLU;
+import com.jogamp.opengl.util.awt.TextRenderer;
 
 /**
  * Um jogo onde o player é como um motorista de uma motocicleta.
@@ -53,6 +55,8 @@ public class CityBike implements GameConfiguration {
 	
 	GameEngine engine = new GameEngine();
 	Object carsLock = new Object();
+	
+	TextRenderer renderer;
 		
 	//Objects
 	Player player = new Player();
@@ -71,7 +75,8 @@ public class CityBike implements GameConfiguration {
 				x = -10.0f;
 			else
 				x = -110.0f; //rigth
-			cars.add(new Car(x, player.z + (float)( CAMERA_DISTANCE * 1.5)  ));
+			if(player.GetSpeed() != 0)
+				cars.add(new Car(x, player.z + (float)( CAMERA_DISTANCE * 1.5)  ));
 		}
 	};
 	Timer timerAddCar = new Timer(TIME_TO_ADD_CAR, actionAddCar);;
@@ -119,7 +124,6 @@ public class CityBike implements GameConfiguration {
 							}
 						}
 					}
-					
 					car.move();
 					car.draw(gl);
 				}
@@ -128,7 +132,6 @@ public class CityBike implements GameConfiguration {
 					if( ColisionDetector.isColiding(player, role)){
 						playerLose();
 					}
-
 					role.draw(gl);
 				}
 				road.draw(gl);
@@ -139,11 +142,26 @@ public class CityBike implements GameConfiguration {
 		}
 
 		private void playerLose() {
+			renderer = new TextRenderer(
+					new Font("SansSerif", Font.BOLD, 45));
+			renderer.beginRendering(850, 850);
+			renderer.setColor(1.0f, 0.0f, 0.0f, 0.8f);
+			renderer.draw("Game Over!", 320, 425);
+			renderer.endRendering();
+			player.setSpeed(0);
+			cars.clear();
 			restartGame();
 		}
 
 		private void playerWin() {
-			
+			renderer = new TextRenderer(
+					new Font("SansSerif", Font.BOLD, 45));
+			renderer.beginRendering(850, 850);
+			renderer.setColor(0.0f, 1.0f, 0.0f, 0.8f);
+			renderer.draw("You Win!", 320, 425);
+			renderer.endRendering();
+			player.setSpeed(0);
+			cars.clear();
 		}
 
 		private void restartGame() {
@@ -192,7 +210,6 @@ public class CityBike implements GameConfiguration {
 					player.moveRight();					
 					break;
 					
-					
 				case UP_CONTROL:
 					player.speedUp();
 					break;
@@ -201,11 +218,9 @@ public class CityBike implements GameConfiguration {
 					player.speedDown();
 					break;
 					
-					
 				case PRINT_LOG:
 					
 					break;
-				
 			}
 		}
 	};

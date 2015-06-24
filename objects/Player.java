@@ -130,6 +130,14 @@ public class Player extends GameObject{
 		if( speed != 0)
 		speed-= 1;
 	}
+	
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+	
+	public int GetSpeed() {
+		return speed;
+	}
 	/**
 	 * Eight Vertices
 	 * 	G   H
@@ -171,8 +179,6 @@ public class Player extends GameObject{
 	public void vertH(){
 		gl.glVertex3f( x + MOTO_SIZE_X, y + MOTO_SIZE_Y , z + MOTO_SIZE_Z);		
 	}
-
-
 	
 	@Override
 	public float[][] get2DSquare() {

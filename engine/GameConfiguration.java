@@ -14,7 +14,7 @@ public interface GameConfiguration{
 	static final int TOTAL_ROLES = 500;
 	
 	//CAMERA DISTANCE
-	static final int CAMERA_DISTANCE = 1000;
+	static final int CAMERA_DISTANCE = 1500;
 	
 	//Player Settings
 	static final int MOTO_MAX_SPEED = 30;
@@ -26,12 +26,13 @@ public interface GameConfiguration{
 			UP_CONTROL = 38,
 			RIGHT_CONTROL = 39,
 			DOWN_CONTROL = 40,
-			ESC = 27, 
+			ESC = 27,
 			PRINT_LOG = KeyEvent.VK_P;
+	
 	
 	//Road
 	static final int
-	DISTANCE_SIZE = 30 * 60 * MOTO_MAX_SPEED,
+	DISTANCE_SIZE = 3 * 60 * MOTO_MAX_SPEED,
 	WIDTH_SIZE = 300,
 	WIDTH_ROAD_DETAIL = 10,
 	TOTAL_DETAILS = 50,
