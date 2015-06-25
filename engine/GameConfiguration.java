@@ -37,7 +37,7 @@ public interface GameConfiguration{
 	ROAD_WIDTH_SIZE = 300,
 	WIDTH_ROAD_DETAIL = 10,
 	TOTAL_DETAILS = 50,
-	DETAIL_SIZE = 50;
+	DETAIL_SIZE = 100;
 	
 	
 }

@@ -176,13 +176,13 @@ public class CityBike implements GameConfiguration {
 			// Display Distance Left
 			renderer.beginRendering(850, 850);
 			renderer.setColor(1.0f, 1.0f, 1.0f, 0.8f);
-			renderer.draw("Left: "+((ROAD_SIZE - player.z)/10000)+ " km", 20, 800);
+			renderer.draw("Left: "+((int)((ROAD_SIZE - player.z)/MOTO_MAX_SPEED))+ " m", 20, 800);
 			renderer.endRendering();	
 			
 			//Display Velocity
 			renderer.beginRendering(850, 850);
 			renderer.setColor(1.0f, 1.0f, 1.0f, 0.8f);
-			renderer.draw("Speed: "+((int)(4.8745 * player.speed))+ " km/h", 20, 700);
+			renderer.draw("Speed: "+((int)(3.6 * 50 * player.speed)/MOTO_MAX_SPEED)+ " km/h", 20, 700);
 			renderer.endRendering();	
 			
 			
