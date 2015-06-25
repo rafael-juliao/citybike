@@ -17,6 +17,7 @@ import pucrs.cg1.citybike.engine.GameEngine;
 import pucrs.cg1.citybike.engine.GameEngine.CameraCallback;
 import pucrs.cg1.citybike.engine.GameEngine.OnUpdateCallback;
 import pucrs.cg1.citybike.objects.Car;
+import pucrs.cg1.citybike.objects.Cenario;
 import pucrs.cg1.citybike.objects.Player;
 import pucrs.cg1.citybike.objects.Road;
 import pucrs.cg1.citybike.objects.Role;
@@ -63,20 +64,12 @@ public class CityBike implements GameConfiguration {
 	Road road = new Road();	
 	ArrayList<Car> cars = new ArrayList<>();
 	ArrayList<Role> roles = new ArrayList<>();
+	Cenario cenario = new Cenario();
 	
 	ActionListener actionAddCar = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			Random random = new Random();
-			int pos = random.nextInt(3);
-			float x = 0.0f;
-			if(pos == 0) // left
-				x = 90.0f;
-			else if(pos == 1) //center
-				x = -10.0f;
-			else
-				x = -110.0f; //rigth
-			if(player.GetSpeed() != 0)
-				cars.add(new Car(x, player.z + (float)( CAMERA_DISTANCE * 1.5)  ));
+			if(player.speed > 10)
+				cars.add(new Car(player.z));
 		}
 	};
 	Timer timerAddCar = new Timer(TIME_TO_ADD_CAR, actionAddCar);;
@@ -97,7 +90,7 @@ public class CityBike implements GameConfiguration {
 	private void addRoles() {
 		for( int i = 0; i < TOTAL_ROLES; i++){
 			roles.add( new Role( ) );
-		}
+		} 
 		
 	}
 
@@ -106,8 +99,9 @@ public class CityBike implements GameConfiguration {
 		@Override
 		public void onUpdate(GL2 gl, GLU glu) {
 			synchronized (carsLock) {
-				
+				timerAddCar.setDelay(TIME_TO_ADD_CAR - 5 * player.speed);
 				road.draw(gl);
+				cenario.draw(gl);
 				player.move();
 				player.draw(gl);
 				
@@ -116,9 +110,13 @@ public class CityBike implements GameConfiguration {
 						if( !car_aux.equals(car) && ColisionDetector.isColiding(car, car_aux)){
 							//Se os carros baterem o de traz freia
 							if( car.z > car_aux.z ){
-								car_aux.speedDown();
+								car_aux.speed--;
+								if( car.speed == car_aux.speed)
+									car.speed++;
 							}else{
-								car.speed-=1;
+								car.speed--;
+								if( car_aux.speed == car.speed)
+									car_aux.speed++;	
 							}
 						}
 					}
@@ -128,6 +126,12 @@ public class CityBike implements GameConfiguration {
 					if( ColisionDetector.isColiding(player, car)){
 						playerLose();
 						return;
+					}
+					
+					if( car.z < player.z && !car.isBehind){
+						car.isBehind = true;
+						player.score+= player.speed;
+						player.total_cars_behind++;
 					}
 				}
 				
@@ -145,8 +149,42 @@ public class CityBike implements GameConfiguration {
 				if( player.x > -MOTO_SIZE_X + ROAD_WIDTH_SIZE/2 || player.x < (-ROAD_WIDTH_SIZE)/2){
 					playerLose();
 				}
+				
+				DisplayInformation();
 
 			}			
+			
+		}
+
+		private void DisplayInformation() {
+			renderer = new TextRenderer(
+					new Font("SansSerif", Font.BOLD, 25));
+			
+			// Display Score
+			renderer.beginRendering(850, 850);
+			renderer.setColor(1.0f, 1.0f, 1.0f, 0.8f);
+			renderer.draw("Score: "+player.score, 20, 775);
+			renderer.endRendering();
+			
+			// Display total Cars Behind
+			renderer.beginRendering(850, 850);
+			renderer.setColor(1.0f, 1.0f, 1.0f, 0.8f);
+			renderer.draw("Cars: "+player.total_cars_behind, 20, 750);
+			renderer.endRendering();	
+			
+			
+			// Display Distance Left
+			renderer.beginRendering(850, 850);
+			renderer.setColor(1.0f, 1.0f, 1.0f, 0.8f);
+			renderer.draw("Left: "+((ROAD_SIZE - player.z)/10000)+ " km", 20, 800);
+			renderer.endRendering();	
+			
+			//Display Velocity
+			renderer.beginRendering(850, 850);
+			renderer.setColor(1.0f, 1.0f, 1.0f, 0.8f);
+			renderer.draw("Speed: "+((int)(4.8745 * player.speed))+ " km/h", 20, 700);
+			renderer.endRendering();	
+			
 			
 		}
 
@@ -186,9 +224,10 @@ public class CityBike implements GameConfiguration {
 	CameraCallback cameraCallback = new CameraCallback() {		
 		@Override
 		public void updateCamera(GLU glu) {
+			float x_aux = (player.x) / 7;
 	        glu.gluLookAt(
-	        		player.x , player.y +35, player.z - 50, 	//WHERE
-	        		player.x, player.y+35, player.z,	//AT 
+	        		player.x +(MOTO_SIZE_X/2) + x_aux , player.y +35, player.z - 50, 	//WHERE
+	        		player.x+(MOTO_SIZE_X/2) + x_aux, player.y+35, player.z,	//AT 
 	        		0, 1, 0 	//SKY
 	        		);
 		}

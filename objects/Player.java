@@ -9,7 +9,9 @@ import com.jogamp.opengl.GL2;
 public class Player extends GameObject{
 	
 	
-	private int speed = 0;
+	public int speed = 0;
+	public int total_cars_behind = 0;
+	public int score = 0;
 		
 	@Override
 	public void draw(GL2 gl) {
@@ -135,8 +137,12 @@ public class Player extends GameObject{
 	}
 
 	public void speedDown(){
-		if( speed != 0)
-		speed-= 1;
+		if( speed == 1){
+			speed = 0;
+		}
+		if( speed >= 1){
+			speed-= 2;
+		}
 	}
 	
 	public void setSpeed(int speed) {

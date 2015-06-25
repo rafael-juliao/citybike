@@ -1,5 +1,4 @@
 package pucrs.cg1.citybike.objects;
-
 import java.util.Random;
 
 import pucrs.cg1.citybike.engine.GameObject;
@@ -11,35 +10,88 @@ public class Car extends GameObject {
 	public int size_x, size_y, size_z;
 	public int speed = 0;
 	public int carType = 0;
+
+	public boolean isBehind = false;
+	public int x_original;
+	public int x_next;
+	public int x_range;
+	public int z_counter;
+	public int z_min;
 	
-	public Car(float posX, float posZ) {
-		x = posX;
-		z = posZ;
-		Random random = new Random();
+	private Random random;
+	
+	public Car(float player_z) {
+		z =  player_z + (float)( CAMERA_DISTANCE * 1.5);
 		
+		random = new Random();
+		
+		int pos = random.nextInt(3);
+		if(pos == 0) // left
+			x = 70.0f;
+		else if(pos == 1) //center
+			x = -50.0f;
+		else
+			x = -125.0f; //rigth
+	
+		x_original = (int)x;
 		int carType = random.nextInt(3);
+		int great = random.nextInt(10);
 		
 		switch (carType) {
 		case 1: //caminhao
-			size_z = 170  + random.nextInt(250);
-			size_y = 45 + random.nextInt(20);
-			size_x = 40 + random.nextInt(30);
-			speed = 12 + random.nextInt(2);
+			x_range = 5;
+			z_min = 300;
+			size_z = 170  + great * 25;
+			size_y = 45 + great * 2;
+			size_x = 45 + great * 5;
+			speed = 12 + (int)(great * 0.3);
 			break;
 		case 2://Moto
-			size_z = 50 + random.nextInt(20);
-			size_y = 20 + random.nextInt(15);
-			size_x = 10 + random.nextInt(10);
-			speed = 10 + random.nextInt(10);	
+			x_range = 25;
+			z_min = 100;
+			size_z = 30 + great * 2;
+			size_y = 20 + (int)(great * 1.5);
+			size_x = 10 + great * 1;
+			speed = 10 + (int) (great * 1);	
+			x-= 15;
 			break;
 		default: //carro
-			size_z = 60 + random.nextInt(30);
-			size_x = 30 + random.nextInt(20);
-			size_y = 25 + random.nextInt(10);
-			//Deixa os valores padrão
-			speed = 12 + random.nextInt(6);
+			x_range = 15;
+			z_min = 200;
+			size_z = 50 + (int)(great * 3.0);
+			size_x = 30 + (int)(great * 2.0);
+			size_y = 25 + (int)(great * 1.0);
+			speed = 12 + (int) (great* 0.6);
+			x-= size_x/3;
 			break;
 		}
+	}
+	
+	public void move(){
+		if(speed <= MINIMUM_SPEED ) speed = MINIMUM_SPEED;
+			z += speed;
+		
+		//Set New Rote to X
+		if( x == x_next ){
+			x_next = -x_range + x_original + random.nextInt(x_range * 2);
+			z_counter = 0;
+		}
+		
+		//Move X
+		else{
+			z_counter+=speed;
+			if( z_counter > z_min){
+				z_counter = 0;
+				
+				//Move
+				if( x > x_next){
+					x--;
+				}else{
+					x++;
+				}	
+			}
+		}
+		
 	}
 	
 	@Override
@@ -186,14 +238,8 @@ public class Car extends GameObject {
 		return square;
 	}
 	
-	public void move(){
-		if(speed <= MINIMUM_SPEED ) speed = MINIMUM_SPEED;
-			z += speed;
-	}
 
-	public void speedDown() {
-		speed--;
 
-	}
+	
 	
 }

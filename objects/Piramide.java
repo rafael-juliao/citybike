@@ -11,6 +11,8 @@ public class Piramide extends GameObject {
 	@Override
 	public void draw(GL2 gl) {
 
+		this.gl = gl;
+		
 		gl.glColor3f(0.5f, 0.5f, 0f);
 		
 		gl.glBegin(GL2.GL_QUADS);
@@ -18,8 +20,12 @@ public class Piramide extends GameObject {
 		vertB();
 		vertC();
 		vertD();
+		gl.glEnd();
 		
-		gl.glBegin(GL2.GL_TRIANGLES);           // Begin drawing the pyramid with 4 triangles
+		gl.glBegin(GL2.GL_TRIANGLES); 
+
+		gl.glColor3f(0.5f, 0.5f, 0f);
+		// Begin drawing the pyramid with 4 triangles
 		vertA();
 		vertB();
 		vertE();
@@ -37,6 +43,8 @@ public class Piramide extends GameObject {
 		vertE();
 		
 
+		gl.glEnd();
+		
 		gl.glColor3f(0f, 0f, 0f);
 		gl.glBegin(GL2.GL_LINES);
 		gl.glLineWidth(5f);

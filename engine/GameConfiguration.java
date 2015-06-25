@@ -2,19 +2,19 @@ package pucrs.cg1.citybike.engine;
 
 import java.awt.event.KeyEvent;
 
-public interface GameConfiguration{
+public interface GameConfiguration{ 
 	
 
 	//Window
 	static final int WIDTH = 800, HEIGHT = 640, FPS = 60;
 
 	//Game Settings
-	static final int TIME_TO_ADD_CAR = 500;
+	static final int TIME_TO_ADD_CAR = 650;
 	static final int MINIMUM_SPEED = 4;
-	static final int TOTAL_ROLES = 50;
+	static final int TOTAL_ROLES = 150;
 	
 	//CAMERA DISTANCE
-	static final int CAMERA_DISTANCE = 1500;
+	static final int CAMERA_DISTANCE = 2000;
 	
 	//Player Settings
 	static final int MOTO_MAX_SPEED = 50;
@@ -33,7 +33,7 @@ public interface GameConfiguration{
 	
 	//Road
 	static final int
-	ROAD_SIZE =  5 * 60 * MOTO_MAX_SPEED,
+	ROAD_SIZE =  30 * 60 * MOTO_MAX_SPEED,
 	ROAD_WIDTH_SIZE = 300,
 	WIDTH_ROAD_DETAIL = 10,
 	TOTAL_DETAILS = 50,
