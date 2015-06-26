@@ -15,13 +15,13 @@ import com.jogamp.opengl.glu.GLU;
 /**
  * in role x, y, z, represents the center;
  * */
-public class Role extends GameObject {
+public class Hole extends GameObject {
 	
 	public float radius;
 	
-	public Role(){
+	public Hole(){
 		Random rand = new Random();
-		radius = 2 + ( rand.nextFloat() * 5 );
+		radius = 2 + ( rand.nextFloat() * 10 );
 		x = -(WIDTH/6) + ( rand.nextFloat() * (WIDTH/3) );
 		z = rand.nextFloat() * ROAD_SIZE;
 		y = -4;

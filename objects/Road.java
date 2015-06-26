@@ -8,7 +8,7 @@ import com.jogamp.opengl.GL2;
 public class Road extends GameObject{
 		
 	public Road(){
-		y-=5;
+		y = 1;
 	}
 
 	@Override
@@ -18,10 +18,10 @@ public class Road extends GameObject{
 
 		gl.glColor3f(0.5f, 0.5f, 0.5f);
 		
-		gl.glVertex3f( x - (ROAD_WIDTH_SIZE/2), y , z + ROAD_SIZE);
-		gl.glVertex3f( x - (ROAD_WIDTH_SIZE/2), y , z);
-		gl.glVertex3f( x + (ROAD_WIDTH_SIZE/2), y , z);
-		gl.glVertex3f( x + (ROAD_WIDTH_SIZE/2), y , z + ROAD_SIZE);
+		gl.glVertex3f( x - (WIDTH_ROAD_SIZE/2), y , z + ROAD_SIZE);
+		gl.glVertex3f( x - (WIDTH_ROAD_SIZE/2), y , z);
+		gl.glVertex3f( x + (WIDTH_ROAD_SIZE/2), y , z);
+		gl.glVertex3f( x + (WIDTH_ROAD_SIZE/2), y , z + ROAD_SIZE);
 
 		gl.glColor3f(1f, 1f, 1f);
 		for( int i = 0; i < ROAD_SIZE / DETAIL_SIZE; i+=2){			

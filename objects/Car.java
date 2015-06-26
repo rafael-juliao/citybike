@@ -31,7 +31,7 @@ public class Car extends GameObject {
 		else if(pos == 1) //center
 			x = -50.0f;
 		else
-			x = -125.0f; //rigth
+			x = -150.0f; //rigth
 	
 		x_original = (int)x;
 		int carType = random.nextInt(3);
@@ -39,8 +39,8 @@ public class Car extends GameObject {
 		
 		switch (carType) {
 		case 1: //caminhao
-			x_range = 5;
-			z_min = 300;
+			x_range = 15;
+			z_min = 100;
 			size_z = 170  + great * 25;
 			size_y = 45 + great * 2;
 			size_x = 45 + great * 5;
@@ -48,7 +48,7 @@ public class Car extends GameObject {
 			break;
 		case 2://Moto
 			x_range = 25;
-			z_min = 100;
+			z_min = 20;
 			size_z = 30 + great * 2;
 			size_y = 20 + (int)(great * 1.5);
 			size_x = 10 + great * 1;
@@ -56,8 +56,8 @@ public class Car extends GameObject {
 			x-= 15;
 			break;
 		default: //carro
-			x_range = 15;
-			z_min = 200;
+			x_range = 20;
+			z_min = 50;
 			size_z = 50 + (int)(great * 3.0);
 			size_x = 30 + (int)(great * 2.0);
 			size_y = 25 + (int)(great * 1.0);

@@ -49,7 +49,7 @@ public class GameEngine implements GLEventListener, GameConfiguration{
 	private CameraCallback cameraCallback;
 	private KeyListener gameControl;
 	
-    public static GLU glu;
+    public GLU glu;
 	private GLCanvas canvas;	
 
 	
@@ -65,7 +65,7 @@ public class GameEngine implements GLEventListener, GameConfiguration{
 		canvas.addGLEventListener(this);
 		
 		//Configure Window
-		window.setLocation(300, 50);
+		window.setLocation(20, 20);
 		window.getContentPane().add(canvas);
 		window.setUndecorated(true); // Remove title bar
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

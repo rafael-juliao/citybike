@@ -1,6 +1,6 @@
 package pucrs.cg1.citybike.engine;
 
-import pucrs.cg1.citybike.objects.Role;
+import pucrs.cg1.citybike.objects.Hole;
 
 
 public class ColisionDetector {
@@ -21,7 +21,6 @@ public class ColisionDetector {
 	 * */
 	public static boolean isColiding(GameObject a, GameObject b){		
 		
-		//Role Threating
 		float[][] retA = a.get2DSquare();
 		float[][] retB = b.get2DSquare();
 		

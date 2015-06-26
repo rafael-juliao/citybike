@@ -20,7 +20,7 @@ import pucrs.cg1.citybike.objects.Car;
 import pucrs.cg1.citybike.objects.Cenario;
 import pucrs.cg1.citybike.objects.Player;
 import pucrs.cg1.citybike.objects.Road;
-import pucrs.cg1.citybike.objects.Role;
+import pucrs.cg1.citybike.objects.Hole;
 
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.glu.GLU;
@@ -63,7 +63,7 @@ public class CityBike implements GameConfiguration {
 	Player player = new Player();
 	Road road = new Road();	
 	ArrayList<Car> cars = new ArrayList<>();
-	ArrayList<Role> roles = new ArrayList<>();
+	ArrayList<Hole> holes = new ArrayList<>();
 	Cenario cenario = new Cenario();
 	
 	ActionListener actionAddCar = new ActionListener() {
@@ -72,7 +72,7 @@ public class CityBike implements GameConfiguration {
 				cars.add(new Car(player.z));
 		}
 	};
-	Timer timerAddCar = new Timer(TIME_TO_ADD_CAR, actionAddCar);;
+	Timer timerAddCar = new Timer(TIME_TO_ADD_CAR, actionAddCar);
 		
 	
 	//Game Lifecycle Methos
@@ -84,12 +84,12 @@ public class CityBike implements GameConfiguration {
         engine.start();
         
 		timerAddCar.start();
-		addRoles();
+		addHoles();
 	}
     
-	private void addRoles() {
-		for( int i = 0; i < TOTAL_ROLES; i++){
-			roles.add( new Role( ) );
+	private void addHoles() {
+		for( int i = 0; i < TOTAL_HOLES; i++){
+			holes.add( new Hole( ) );
 		} 
 		
 	}
@@ -99,7 +99,7 @@ public class CityBike implements GameConfiguration {
 		@Override
 		public void onUpdate(GL2 gl, GLU glu) {
 			synchronized (carsLock) {
-				timerAddCar.setDelay(TIME_TO_ADD_CAR - 5 * player.speed);
+				timerAddCar.setDelay((int)(TIME_TO_ADD_CAR - 5 * player.speed));
 				road.draw(gl);
 				cenario.draw(gl);
 				player.move();
@@ -116,7 +116,7 @@ public class CityBike implements GameConfiguration {
 							}else{
 								car.speed--;
 								if( car_aux.speed == car.speed)
-									car_aux.speed++;	
+									car_aux.speed++;
 							}
 						}
 					}
@@ -136,22 +136,23 @@ public class CityBike implements GameConfiguration {
 				}
 				
 				
-				for( Role role: roles ){
-					if( ColisionDetector.isColiding(player, role)){
-						player.tilt(role.radius);
+				for( Hole hole: holes ){
+					if( ColisionDetector.isColiding(player, hole)){
+						player.tilt(hole.radius);
 					}
-					role.draw2D(gl, glu);
+					hole.draw2D(gl, glu);
 				}
 				
 				if( player.z > ROAD_SIZE)
 					playerWin();
 				
-				if( player.x > -MOTO_SIZE_X + ROAD_WIDTH_SIZE/2 || player.x < (-ROAD_WIDTH_SIZE)/2){
+				if( player.x > -MOTO_SIZE_X + WIDTH_ROAD_SIZE/2 || player.x < (-WIDTH_ROAD_SIZE)/2){
 					playerLose();
 				}
 				
 				DisplayInformation();
-
+				
+				
 			}			
 			
 		}
@@ -182,7 +183,7 @@ public class CityBike implements GameConfiguration {
 			//Display Velocity
 			renderer.beginRendering(850, 850);
 			renderer.setColor(1.0f, 1.0f, 1.0f, 0.8f);
-			renderer.draw("Speed: "+((int)(3.6 * 50 * player.speed)/MOTO_MAX_SPEED)+ " km/h", 20, 700);
+			renderer.draw("Speed: "+(int)(player.speed * 3)+ " km/h", 20, 700);
 			renderer.endRendering();	
 			
 			
@@ -238,33 +239,56 @@ public class CityBike implements GameConfiguration {
 	KeyListener gameControl = new KeyListener() {
 		
 		@Override public void keyTyped(KeyEvent e) { }
-		@Override public void keyReleased(KeyEvent e) { }
+		@Override public void keyReleased(KeyEvent e) { 
+			switch(e.getKeyCode()){
+			case CTRL_LEAVE:
+				//leave game
+				System.exit(0);
+				break;
+			
+			case CTRL_LEFT:
+				player.isTurningLeft = false;
+				break;
+				
+			case CTRL_RIGHT:
+				player.isTurningRight = false;					
+				break;
+				
+			case CTRL_ACCELERATE:
+				player.isAccelerating = false;
+				break;
+				
+			case CTRL_BREAK:
+				player.isBreaking = false;
+				break;
+		}
+		}
 		
 		@Override
 		public void keyPressed(KeyEvent e) {
 			switch(e.getKeyCode()){
-				case ESC:
+				case CTRL_LEAVE:
 					//leave game
 					System.exit(0);
 					break;
 				
-				case LEFT_CONTROL:
-					player.moveLeft();
+				case CTRL_LEFT:
+					player.isTurningLeft = true;
 					break;
 					
-				case RIGHT_CONTROL:
-					player.moveRight();					
+				case CTRL_RIGHT:
+					player.isTurningRight = true;					
 					break;
 					
-				case UP_CONTROL:
-					player.speedUp();
+				case CTRL_ACCELERATE:
+					player.isAccelerating = true;
 					break;
 					
-				case DOWN_CONTROL:
-					player.speedDown();
+				case CTRL_BREAK:
+					player.isBreaking = true;
 					break;
 					
-				case SPACE:
+				case CTRL_RESTART:
 					restartGame();
 					break;
 				case PRINT_LOG:
