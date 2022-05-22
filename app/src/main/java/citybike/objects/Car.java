@@ -1,7 +1,7 @@
-package pucrs.cg1.citybike.objects;
+package citybike.objects;
 import java.util.Random;
 
-import pucrs.cg1.citybike.engine.GameObject;
+import citybike.engine.GameObject;
 
 import com.jogamp.opengl.GL2;
 

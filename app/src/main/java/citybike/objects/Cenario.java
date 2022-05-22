@@ -1,11 +1,11 @@
-package pucrs.cg1.citybike.objects;
+package citybike.objects;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 import com.jogamp.opengl.GL2;
 
-import pucrs.cg1.citybike.engine.GameObject;
+import citybike.engine.GameObject;
 
 public class Cenario extends GameObject {
 

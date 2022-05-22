@@ -1,20 +1,10 @@
-package pucrs.cg1.citybike.objects;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+package citybike.objects;
 import java.util.Random;
-
-import javax.swing.Timer;
-
-import pucrs.cg1.citybike.engine.GameObject;
-
+import citybike.engine.GameObject;
 import com.jogamp.opengl.GL2;
 
 public class Player extends GameObject{
     
-    
-    
-
     public float speed = 0;
     public float acceleration = 0;
     public int total_cars_behind = 0;

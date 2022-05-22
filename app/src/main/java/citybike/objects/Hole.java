@@ -1,4 +1,4 @@
-package pucrs.cg1.citybike.objects;
+package citybike.objects;
 
 
 import static com.jogamp.opengl.fixedfunc.GLMatrixFunc.GL_MODELVIEW;
@@ -6,8 +6,7 @@ import static com.jogamp.opengl.fixedfunc.GLMatrixFunc.GL_PROJECTION;
 
 import java.util.Random;
 
-import pucrs.cg1.citybike.engine.GameEngine;
-import pucrs.cg1.citybike.engine.GameObject;
+import citybike.engine.GameObject;
 
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.glu.GLU;

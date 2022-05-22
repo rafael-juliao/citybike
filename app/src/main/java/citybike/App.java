@@ -1,6 +1,6 @@
-package pucrs.cg1.citybike;
+package citybike;
 
-public class Main {
+public class App {
     //Starter
     public static void main(String[] args){
         CityBike openGLControl = new CityBike();

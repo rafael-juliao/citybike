@@ -1,4 +1,4 @@
-package pucrs.cg1.citybike;
+package citybike;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -11,16 +11,16 @@ import java.util.Random;
 
 import javax.swing.Timer;
 
-import pucrs.cg1.citybike.engine.ColisionDetector;
-import pucrs.cg1.citybike.engine.GameConfiguration;
-import pucrs.cg1.citybike.engine.GameEngine;
-import pucrs.cg1.citybike.engine.GameEngine.CameraCallback;
-import pucrs.cg1.citybike.engine.GameEngine.OnUpdateCallback;
-import pucrs.cg1.citybike.objects.Car;
-import pucrs.cg1.citybike.objects.Cenario;
-import pucrs.cg1.citybike.objects.Player;
-import pucrs.cg1.citybike.objects.Road;
-import pucrs.cg1.citybike.objects.Hole;
+import citybike.engine.ColisionDetector;
+import citybike.engine.GameConfiguration;
+import citybike.engine.GameEngine;
+import citybike.engine.GameEngine.CameraCallback;
+import citybike.engine.GameEngine.OnUpdateCallback;
+import citybike.objects.Car;
+import citybike.objects.Cenario;
+import citybike.objects.Player;
+import citybike.objects.Road;
+import citybike.objects.Hole;
 
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.glu.GLU;

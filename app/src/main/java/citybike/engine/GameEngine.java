@@ -1,14 +1,9 @@
-package pucrs.cg1.citybike.engine;
+package citybike.engine;
 
 import java.awt.Dimension;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
-
-import pucrs.cg1.citybike.objects.Car;
-import pucrs.cg1.citybike.objects.Player;
-import pucrs.cg1.citybike.objects.Road;
 
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;

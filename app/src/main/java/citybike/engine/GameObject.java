@@ -1,4 +1,4 @@
-package pucrs.cg1.citybike.engine;
+package citybike.engine;
 
 import com.jogamp.opengl.GL2;
 

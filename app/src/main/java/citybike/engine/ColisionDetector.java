@@ -1,7 +1,4 @@
-package pucrs.cg1.citybike.engine;
-
-import pucrs.cg1.citybike.objects.Hole;
-
+package citybike.engine;
 
 public class ColisionDetector {
     
