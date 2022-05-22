@@ -16,6 +16,14 @@ repositories {
     mavenCentral()
 }
 
+applicationDefaultJvmArgs = [
+    "--add-exports=java.base/java.lang=ALL-UNNAMED",
+    "--add-exports=java.desktop/sun.awt=ALL-UNNAMED",
+    "--add-exports=java.desktop/sun.java2d=ALL-UNNAMED",
+    "--module-path=citybike/citybike.App",
+]
+//applicationDefaultJvmArgs = ["--module-path=citybike/citybike.App"]
+
 dependencies {
     // Use JUnit Jupiter for testing.
     // testImplementation 'org.junit.jupiter:junit-jupiter:5.7.2'
@@ -30,10 +38,5 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'CityBike.App'
-}
-
-tasks.named('test') {
-    // Use JUnit Platform for unit tests.
-    useJUnitPlatform()
+    mainClass = 'citybike.App'
 }

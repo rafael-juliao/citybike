@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'citybike'
-include('src')
+include('app')
