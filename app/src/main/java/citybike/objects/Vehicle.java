@@ -17,6 +17,10 @@ public class Vehicle extends GameObject {
     public int x_range;
     public int z_counter;
     public int z_min;
+
+    public float redColor = 0.3f;
+    public float greenColor = 0.3f;
+    public float blueColor = 0.3f;
     
     private Random random;
     
@@ -34,36 +38,45 @@ public class Vehicle extends GameObject {
             x = -150.0f; //rigth
     
         x_original = (int)x;
-        int vehicleType = random.nextInt(3);
+        vehicleType = random.nextInt(3);
         int great = random.nextInt(10);
         
         switch (vehicleType) {
-        case 1: //caminhao
-            x_range = 15;
-            z_min = 100;
-            size_z = 170  + great * 25;
-            size_y = 45 + great * 2;
-            size_x = 45 + great * 5;
-            speed = 12 + (int)(great * 0.3);
-            break;
-        case 2://Moto
-            x_range = 25;
-            z_min = 20;
-            size_z = 30 + great * 2;
-            size_y = 20 + (int)(great * 1.5);
-            size_x = 10 + great * 1;
-            speed = 10 + (int) (great * 1);    
-            x-= 15;
-            break;
-        default: //vehiclero
-            x_range = 20;
-            z_min = 50;
-            size_z = 50 + (int)(great * 3.0);
-            size_x = 30 + (int)(great * 2.0);
-            size_y = 25 + (int)(great * 1.0);
-            speed = 12 + (int) (great* 0.6);
-            x-= size_x/3;
-            break;
+            case 1: //caminhao
+                x_range = 15;
+                z_min = 100;
+                size_z = 170  + great * 25;
+                size_y = 45 + great * 2;
+                size_x = 45 + great * 5;
+                speed = 12 + (int)(great * 0.3);
+                redColor = 0.7f;
+                greenColor = 0.7f;
+                blueColor = 0.7f;
+                break;
+            case 2://Moto
+                x_range = 25;
+                z_min = 20;
+                size_z = 30 + great * 2;
+                size_y = 20 + (int)(great * 1.5);
+                size_x = 10 + great * 1;
+                speed = 10 + (int) (great * 1);    
+                x-= 15;
+                redColor = 0.3f;
+                greenColor = 0.3f;
+                blueColor = 0.7f;
+                break;
+            default: //vehiclero
+                x_range = 20;
+                z_min = 50;
+                size_z = 50 + (int)(great * 3.0);
+                size_x = 30 + (int)(great * 2.0);
+                size_y = 25 + (int)(great * 1.0);
+                speed = 12 + (int) (great* 0.6);
+                x-= size_x/3;
+                redColor = 0.3f;
+                greenColor = 0.7f;
+                blueColor = 0.3f;
+                break;
         }
     }
     
@@ -100,8 +113,8 @@ public class Vehicle extends GameObject {
     @Override
     public void draw(GL2 gl) {
         this.gl = gl;
-        gl.glBegin(GL2.GL_QUADS); 
-        gl.glColor3f(1.0f, 1.0f, 1.0f);
+        gl.glBegin(GL2.GL_QUADS);
+        gl.glColor3f(redColor, greenColor, blueColor);
         
         // Define vertices in counter-clockwise (CCW) order with normal pointing out
         // Top face
