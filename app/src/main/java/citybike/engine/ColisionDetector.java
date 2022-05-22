@@ -10,9 +10,6 @@ public class ColisionDetector {
     public static final int X = 0;
     public static final int Z = 1;
     
-    
-    
-
     /**
      * Check if game object is coliding with a rectangle
      * */
@@ -21,25 +18,20 @@ public class ColisionDetector {
         float[][] retA = a.get2DSquare();
         float[][] retB = b.get2DSquare();
         
-        if( retA == null || retB == null)
+        if (retA == null || retB == null)
             return false;
         
-        for( int i = 0; i < 4; i++){
-            if( isInside(retA[i], retB) )
+        for (int i = 0; i < 4; i++)
+            if(isInside(retA[i], retB))
                 return true;
-        }
         
         return false;    
     }
 
     private static boolean isInside(float[] point, float[][] square) {
-        if( point[X] > square[DL][X] && 
-                point[X] < square[UR][X] &&
-                point[Z] > square[DL][Z] &&
-                point[Z] < square[UR][Z])
-            return true;
-        
-        return false;
+        boolean xInside = point[X] > square[DL][X] && point[X] < square[UR][X];
+        boolean zInside = point[Z] > square[DL][Z] && point[Z] < square[UR][Z];
+        return xInside && zInside;
     }
     
     

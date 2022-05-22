@@ -17,7 +17,7 @@ import com.jogamp.opengl.util.FPSAnimator;
 
 public class GameEngine implements GLEventListener, GameConfiguration{
 
-    public interface OnUpdateCallback{
+    public interface GameLoopCallback{
         void onUpdate(GL2 gl, GLU glu);
     }
     
@@ -29,7 +29,7 @@ public class GameEngine implements GLEventListener, GameConfiguration{
         gameControl = keyListener;
     }
     
-    public void setUpdateCallback(OnUpdateCallback callback){
+    public void setGameLoopCallback(GameLoopCallback callback){
         onUpdateCallback = callback;
     }
     
@@ -40,7 +40,7 @@ public class GameEngine implements GLEventListener, GameConfiguration{
     private JFrame window;
     private FPSAnimator fpsAnimator;
     
-    private OnUpdateCallback onUpdateCallback;
+    private GameLoopCallback onUpdateCallback;
     private CameraCallback cameraCallback;
     private KeyListener gameControl;
     

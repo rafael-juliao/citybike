@@ -5,11 +5,11 @@ import citybike.engine.GameObject;
 
 import com.jogamp.opengl.GL2;
 
-public class Car extends GameObject {
+public class Vehicle extends GameObject {
     
     public int size_x, size_y, size_z;
     public int speed = 0;
-    public int carType = 0;
+    public int vehicleType = 0;
 
     public boolean isBehind = false;
     public int x_original;
@@ -20,7 +20,7 @@ public class Car extends GameObject {
     
     private Random random;
     
-    public Car(float player_z) {
+    public Vehicle(float player_z) {
         z =  player_z + (float)( CAMERA_DISTANCE * 1.5);
         
         random = new Random();
@@ -34,10 +34,10 @@ public class Car extends GameObject {
             x = -150.0f; //rigth
     
         x_original = (int)x;
-        int carType = random.nextInt(3);
+        int vehicleType = random.nextInt(3);
         int great = random.nextInt(10);
         
-        switch (carType) {
+        switch (vehicleType) {
         case 1: //caminhao
             x_range = 15;
             z_min = 100;
@@ -55,7 +55,7 @@ public class Car extends GameObject {
             speed = 10 + (int) (great * 1);    
             x-= 15;
             break;
-        default: //carro
+        default: //vehiclero
             x_range = 20;
             z_min = 50;
             size_z = 50 + (int)(great * 3.0);
@@ -67,6 +67,9 @@ public class Car extends GameObject {
         }
     }
     
+
+    
+
     public void move(){
         if(speed <= MINIMUM_SPEED ) speed = MINIMUM_SPEED;
             z += speed;
@@ -101,41 +104,29 @@ public class Car extends GameObject {
         gl.glColor3f(1.0f, 1.0f, 1.0f);
         
         // Define vertices in counter-clockwise (CCW) order with normal pointing out
-              // Top face
-            vertE();
-            vertF();
-            vertH();
-            vertG();
-         
-              // Bottom face
-            vertA();
-            vertB();
-            vertD();
-            vertC();
-         
-              // Front face  
-            vertC();
-            vertD();
-            vertH();
-            vertG();
-         
-              // Back face (z = -1.0f)
-            vertA();
-            vertB();
-            vertF();
-            vertE();
-         
-              // Left face (x = -1.0f)
-            vertA();
-            vertC();
-            vertG();
-            vertE();
-         
-              // Right face (x = 1.0f)
-            vertB();
-            vertD();
-            vertH();
-            vertF();
+        // Top face
+        vertE();vertF();
+        vertH();vertG();
+        
+        // Bottom face
+        vertA();vertB();
+        vertD();vertC();
+        
+        // Front face  
+        vertC();vertD();
+        vertH();vertG();
+        
+        // Back face (z = -1.0f)
+        vertA();vertB();
+        vertF();vertE();
+        
+        // Left face (x = -1.0f)
+        vertA();vertC();
+        vertG();vertE();
+        
+        // Right face (x = 1.0f)
+        vertB();vertD();
+        vertH();vertF();
             
         gl.glEnd();  // End of drawing color-cube
     
@@ -144,81 +135,34 @@ public class Car extends GameObject {
         gl.glLineWidth(5f);
         
         //First Square
-        vertA();
-        vertB();
-        
-        vertB();
-        vertF();
-
-        vertF();
-        vertE();
-        
-
-        vertE();
-        vertA();
-        
+        vertA(); vertB();
+        vertB(); vertF();
+        vertF(); vertE();
+        vertE(); vertA();
         
         //Ligations
-        vertA();
-        vertC();
+        vertA();vertC();
+        vertB();vertD();
+        vertE();vertG();
+        vertF();vertH();
 
-        vertB();
-        vertD();
-        
-        vertE();
-        vertG();        
-
-        vertF();
-        vertH();
-        
         //Second Square
-        vertC();
-        vertD();
+        vertC();vertD();
+        vertD();vertH();
+        vertH();vertG();
+        vertG();vertC();
 
-        vertD();
-        vertH();
-
-        vertH();
-        vertG();
-
-        vertG();
-        vertC();    
-        
         gl.glEnd();  
     }
     
-    public void vertA(){
-        gl.glVertex3f( x , y , z);
-    }
-    
-    public void vertB(){
-        gl.glVertex3f( x + size_x , y, z);
-    }
-    
-    public void vertC(){
-        gl.glVertex3f( x , y, z + size_z);
-    }
-    
-    public void vertD(){
-        gl.glVertex3f( x + size_x, y, z + size_z);        
-    }
-    
-    public void vertE(){
-        gl.glVertex3f( x , y + size_y , z);
-    }
-    
-    public void vertF(){
-        gl.glVertex3f( x + size_x , y + size_y, z);
-        
-    }
-    
-    public void vertG(){
-        gl.glVertex3f( x , y + size_y, z + size_z);
-    }
-    
-    public void vertH(){
-        gl.glVertex3f( x + size_x, y + size_y , z + size_z);        
-    }
+    public void vertA() { gl.glVertex3f( x , y , z); }
+    public void vertB() { gl.glVertex3f( x + size_x , y, z); }
+    public void vertC() { gl.glVertex3f( x , y, z + size_z); }
+    public void vertD() { gl.glVertex3f( x + size_x, y, z + size_z); }
+    public void vertE() { gl.glVertex3f( x , y + size_y , z); }
+    public void vertF() { gl.glVertex3f( x + size_x , y + size_y, z); }
+    public void vertG() { gl.glVertex3f( x , y + size_y, z + size_z); }
+    public void vertH() { gl.glVertex3f( x + size_x, y + size_y , z + size_z); }
     
     public float[][] get2DSquare() {
         float[][] square = new float[4][2];
@@ -238,6 +182,7 @@ public class Car extends GameObject {
         return square;
     }
     
+
 
 
     

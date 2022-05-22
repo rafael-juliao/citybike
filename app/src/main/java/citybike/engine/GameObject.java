@@ -11,6 +11,10 @@ public class GameObject implements ColisionProperty, GameConfiguration{
         this.gl = gl;
     }
 
+    public boolean checkColision() {
+        return false;
+    }
+
     @Override
     public float[][] get2DSquare() {
         return null;

@@ -7,17 +7,22 @@ public class Player extends GameObject{
     
     public float speed = 0;
     public float acceleration = 0;
-    public int total_cars_behind = 0;
+    public int total_vehicles_behind = 0;
     public int score = 0;
 
     public boolean isTurningRight;
-
     public boolean isTurningLeft;
-
     public boolean isAccelerating;
-
     public boolean isBreaking;
 
+    public void reset(){
+        speed = 0;
+        acceleration = 0;
+        total_vehicles_behind = 0;
+        score = 0;
+        z = 0;
+        x = 0;
+    }
     
     public void tilt(float base){
         Random random = new Random();
@@ -217,6 +222,52 @@ public class Player extends GameObject{
     
 
     
-    
+    public void keyPressed(int keyCode) {
+
+        switch(keyCode) {
+
+            case CTRL_LEFT:
+                isTurningLeft = true;
+                break;
+                
+            case CTRL_RIGHT:
+                isTurningRight = true;                    
+                break;
+                
+            case CTRL_ACCELERATE:
+                isAccelerating = true;
+                break;
+                
+            case CTRL_BREAK:
+                isBreaking = true;
+                break;
+
+        }
+
+    }
+
+    public void keyReleased(int keyCode) {
+
+        switch(keyCode) {
+
+            case CTRL_LEFT:
+                isTurningLeft = false;
+                break;
+            
+            case CTRL_RIGHT:
+                isTurningRight = false;                    
+                break;
+                
+            case CTRL_ACCELERATE:
+                isAccelerating = false;
+                break;
+                
+            case CTRL_BREAK:
+                isBreaking = false;
+                break;
+
+        }
+        
+    }
     
 }
