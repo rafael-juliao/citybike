@@ -6,7 +6,8 @@ public interface GameConfiguration{
     
 
     //Window
-    static final int WIDTH = 1024, HEIGHT = 720, FPS = 60;
+    // static final int WIDTH = 1024, HEIGHT = 720, FPS = 60;
+    static final int WIDTH = 1440, HEIGHT = 900, FPS = 60;
 
     //Cenario Settings
     static final int TIME_TO_ADD_CAR = 650;

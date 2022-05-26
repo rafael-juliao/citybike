@@ -53,7 +53,9 @@ public class VehicleList extends GameObject {
         
         if (vehicle.z < player.z && !vehicle.isBehind) {
             vehicle.isBehind = true;
-            player.score+= player.speed;
+            float xDistance = Math.abs(player.x - vehicle.x);
+            double pointsForOvertake = (player.speed / Math.sqrt(xDistance)) * 10;
+            player.score += pointsForOvertake;
             player.total_vehicles_behind++;
         }
 
